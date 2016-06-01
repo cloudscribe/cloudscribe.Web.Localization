@@ -1,8 +1,7 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<WebLib.WebLibSharedResources> sr
+
 
 <h2>Hello there from Foo!</h2>
 <h3>@ViewData["Message"]</h3>
+@sr["how do I love thee, let me count the ways"]
