@@ -78,6 +78,6 @@ If you don't want to use global resources in preference to embedded resources in
         "TryGlobalFirst": "true"
     }
 	
-Now if you develop class library projects with Controllers that you want to localize, you can add resx files into the main web application.
+Now if you develop class library projects with Controllers that you want to localize, you can add resx files into the main web application to localize your controllers even though they live in a class library.
 
 To more fully understand ASP.NET Core localization be sure to [read the docs](https://docs.asp.net/en/latest/fundamentals/localization.html), to more fully understand cloudscribe.Web.Localization, study the localization.WebApp project in this repository which has examples showing how to localize a class library and how to override the class library localization from the main web application. 
