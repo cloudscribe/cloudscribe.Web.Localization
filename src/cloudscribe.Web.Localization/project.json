@@ -1,0 +1,27 @@
+{
+    "version": "1.0.0-beta1",
+    "description": "more flexible localization for ASP.NET Core",
+    "authors": [ "Joe Audette" ],
+    "packOptions": {
+        "owners": [ "Source Tree Solutions" ],
+        "tags": [ "cloudscribe", "localization", "resx" ],
+        "projectUrl": "https://github.com/joeaudette/cloudscribe.Web.Localization",
+        "licenseUrl": "http://www.apache.org/licenses/LICENSE-2.0",
+        "copyright": "2016 Source Tree Solutions",
+        "iconUrl": "https://raw.githubusercontent.com/joeaudette/cloudscribe/master/cloudscribe-icon-32.png",
+        "requireLicenseAcceptance": false,
+        "releaseNotes": ""
+    },
+
+    "dependencies": {
+        "Microsoft.Extensions.Localization": "1.0.0-rc2-final",
+        "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0-rc2-final",
+        "NETStandard.Library": "1.5.0-rc2-24027"
+    },
+
+    "frameworks": {
+        "netstandard1.5": {
+            "imports": "dnxcore50"
+        }
+    }
+}
