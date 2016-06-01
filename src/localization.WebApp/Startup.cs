@@ -64,21 +64,10 @@ namespace localization.WebApp
             // but without this the language dropdown in layout only shows english
             services.Configure<RequestLocalizationOptions>(options =>
             {
-                //var supportedCultures = new[]
-                //{
-                //    new CultureInfo("en-US"),
-                //    new CultureInfo("fr")
-                //};
-
                 var supportedCultures = new[]
                 {
                     new CultureInfo("en-US"),
-                    new CultureInfo("en-AU"),
-                    new CultureInfo("en-GB"),
                     new CultureInfo("en"),
-                    new CultureInfo("es-ES"),
-                    new CultureInfo("es-MX"),
-                    new CultureInfo("es"),
                     new CultureInfo("fr-FR"),
                     new CultureInfo("fr"),
                 };
@@ -130,29 +119,6 @@ namespace localization.WebApp
 
             var locOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
             app.UseRequestLocalization(locOptions.Value);
-
-            //var supportedCultures = new[]
-            //{
-            //    new CultureInfo("en-US"),
-            //    new CultureInfo("en-AU"),
-            //    new CultureInfo("en-GB"),
-            //    new CultureInfo("en"),
-            //    new CultureInfo("es-ES"),
-            //    new CultureInfo("es-MX"),
-            //    new CultureInfo("es"),
-            //    new CultureInfo("fr-FR"),
-            //    new CultureInfo("fr"),
-            //};
-
-            //app.UseRequestLocalization(new RequestLocalizationOptions
-            //{
-            //    DefaultRequestCulture = new RequestCulture("en-US"),
-            //    // Formatting numbers, dates, etc.
-            //    SupportedCultures = supportedCultures,
-            //    // UI strings that we have localized.
-            //    SupportedUICultures = supportedCultures
-            //});
-
             
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
 
