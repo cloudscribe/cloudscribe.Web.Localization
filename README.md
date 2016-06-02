@@ -1,5 +1,12 @@
 # cloudscribe.Web.Localization - more flexible localization for ASP.NET Core
 
+## Update 2016-06-02
+
+Unfortunately this solution does not do what I want because when you publish the resx files get compiled and there seems no way around it at the moment. I can get it to include the raw resx files in the published output, but editing or adding new resx files after deployment does not work.
+Pretty unhappy about this and hope there is some possible solution.
+
+## end update
+
 I developed this project to meet my localization goals for [cloudscribe.Core](https://github.com/joeaudette/cloudscribe) and [cloudscribe.SimpleContent](https://github.com/joeaudette/cloudscribe.SimpleContent). However it has no dependencies on other cloudscribe components and can be used by anyone who wants the provided functionality.
 
 ## Rationale
