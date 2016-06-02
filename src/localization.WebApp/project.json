@@ -96,7 +96,6 @@
     "include": [
         "wwwroot",
         "Views",
-        "GlobalResources",
         "appsettings.json",
         "web.config"
     ]
