@@ -236,3 +236,4 @@ _Pvt_Extensions
 .fake/
 
 src/localization.WebApp/wwwroot/lib*
+src/localization.WebApp/Properties/PublishProfiles*
