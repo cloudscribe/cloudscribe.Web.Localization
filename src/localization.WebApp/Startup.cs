@@ -48,7 +48,7 @@ namespace localization.WebApp
             //services.AddSingleton<IStringLocalizerFactory, PatchedResourceManagerStringLocalizerFactory>();
 
             //services.AddLocalization();
-            services.AddLocalization(options => options.ResourcesPath = "Resources" );
+            services.AddLocalization(options => options.ResourcesPath = "GlobalResources" );
 
             services.AddMvc()
                 .AddRazorOptions(options =>

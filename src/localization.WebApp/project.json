@@ -94,10 +94,11 @@
 
   "publishOptions": {
     "include": [
-      "wwwroot",
-      "Views",
-      "appsettings.json",
-      "web.config"
+        "wwwroot",
+        "Views",
+        "GlobalResources",
+        "appsettings.json",
+        "web.config"
     ]
   },
 
