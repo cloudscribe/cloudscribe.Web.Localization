@@ -1,12 +1,5 @@
 # cloudscribe.Web.Localization - more flexible localization for ASP.NET Core
 
-## Update 2016-06-02
-
-Unfortunately this solution does not do what I want because when you publish the resx files get compiled and there seems no way around it at the moment. I can get it to include the raw resx files in the published output, but editing or adding new resx files after deployment does not work.
-Pretty unhappy about this and hope there is some possible solution.
-
-## end update
-
 I developed this project to meet my localization goals for [cloudscribe.Core](https://github.com/joeaudette/cloudscribe) and [cloudscribe.SimpleContent](https://github.com/joeaudette/cloudscribe.SimpleContent). However it has no dependencies on other cloudscribe components and can be used by anyone who wants the provided functionality.
 
 ## Rationale
@@ -88,3 +81,10 @@ If you don't want to use global resources in preference to embedded resources in
 Now if you develop class library projects with Controllers that you want to localize, you can add resx files into the main web application to localize your controllers even though they live in a class library.
 
 To more fully understand ASP.NET Core localization be sure to [read the docs](https://docs.asp.net/en/latest/fundamentals/localization.html), to more fully understand cloudscribe.Web.Localization, study the localization.WebApp project in this repository which has examples showing how to localize a class library and how to override the class library localization from the main web application. 
+
+## Update 2016-06-02
+
+Unfortunately this solution does not do what I want because when you publish the resx files get compiled and there seems no way around it at the moment. I can get it to include the raw resx files in the published output, but editing or adding new resx files after deployment does not work.
+Pretty unhappy about this and hope there is some possible solution.
+
+It is still possible to add new resx files and override resx files from class libraries, but it requires re-publish the main web app if you do that. This is not as ideal as I would like it to be.
