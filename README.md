@@ -80,10 +80,6 @@ If you don't want to use global resources in preference to embedded resources in
 	
 Now if you develop class library projects with Controllers that you want to localize, you can add resx files into the main web application to localize your controllers even though they live in a class library.
 
+Note that adding new resx files to your application requires re-publishing the web application. This is not as ideal as I would like it to be, but I adding a new language is an infrequent activity so having to re-publish is probably not a huge burden in most cases, and it makes sense that the framework is not optimized for infrequent activities. The end result is that resx files are all pre-compiled which means they need no post deployment compilation and therefore adding more languages should not impact application startup performance like it did in the old days with App_GlobalResources folder when the ASP.NET Compiler had to compile all the .resx files at startup time.
+
 To more fully understand ASP.NET Core localization be sure to [read the docs](https://docs.asp.net/en/latest/fundamentals/localization.html), to more fully understand cloudscribe.Web.Localization, study the localization.WebApp project in this repository which has examples showing how to localize a class library and how to override the class library localization from the main web application. 
-
-## Update 2016-06-02
-
-Unfortunately this solution does not do exactly what I want because when you publish the web application, the resx files get compiled and there seems no way around it at the moment. I can get it to include the raw resx files in the published output, but editing or adding new resx files after deployment does not work, so there is no point in publishing or deploying the raw resx files.
-
-It is still possible to add new resx files and override resx files from class libraries, but it requires re-publish the main web app if you do that. This is not as ideal as I would like it to be, but I guess adding a new language is an infrequent activity so having to re-publish is probably not a huge burden in most cases, and it makes sense that the framework is not optimized for infrequent activities. The end result is that resx files are all pre-compiled which means they need no post deployment compilation and therefore adding more languages should not impact app startup performance like it did in the old days with App_GlobalResources folder when the ASP.NET Compiler had to compile all the .resx files.
