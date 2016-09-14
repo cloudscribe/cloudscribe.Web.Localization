@@ -12,10 +12,10 @@
     },
 
     "dependencies": {
-        "Microsoft.AspNetCore.Mvc.Razor": "1.0.0",
-        "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.0.0",
-        "Microsoft.Extensions.FileProviders.Embedded": "1.0.0",
-        "Microsoft.Extensions.Localization.Abstractions": "1.0.0",
+        "Microsoft.AspNetCore.Mvc.Razor": "1.0.*",
+        "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.0.*",
+        "Microsoft.Extensions.FileProviders.Embedded": "1.0.*",
+        "Microsoft.Extensions.Localization.Abstractions": "1.0.*",
         "NETStandard.Library": "1.6.0"
     },
 
