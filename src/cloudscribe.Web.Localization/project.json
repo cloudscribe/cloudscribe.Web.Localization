@@ -1,5 +1,5 @@
 {
-    "version": "1.0.1-rc20160914",
+    "version": "1.1.0-rc20161127",
     "description": "more flexible localization for ASP.NET Core",
     "authors": [ "Joe Audette" ],
     "packOptions": {
@@ -14,9 +14,9 @@
     },
 
     "dependencies": {
-        "Microsoft.Extensions.Localization": "1.0.*",
-        "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.*",
-        "NETStandard.Library": "1.6.0"
+        "Microsoft.Extensions.Localization": "1.1.*",
+        "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.*",
+        "NETStandard.Library": "1.6.1"
     },
 
     "frameworks": {
