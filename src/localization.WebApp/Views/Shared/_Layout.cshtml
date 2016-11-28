@@ -43,6 +43,7 @@
                     <li><a asp-controller="Baz" asp-action="Index">@Localizer["Baz"]</a></li>
                     <li><a asp-controller="Bar" asp-action="Index">@Localizer["Bar"]</a></li>
                     <li><a asp-controller="Other" asp-action="Index">@Localizer["Other"]</a></li>
+                    <li><a asp-controller="Message" asp-action="Index">@Localizer["Message"]</a></li>
                     
                 </ul>
                 
@@ -55,7 +56,10 @@
         <footer>
             <div class="row">
                 <div class="col-md-6">
-                    <p>&copy; 2015 - localization.WebApp</p>
+                    <p>
+                        &copy; 2015 - localization.WebApp
+                        @CultureInfo.CurrentCulture.Name
+                    </p>
                 </div>
                 <div class="col-md-6 text-right">
                     @await Html.PartialAsync("_SelectLanguagePartial")
