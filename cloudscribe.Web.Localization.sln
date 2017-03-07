@@ -1,20 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0C7E9264-4D14-4C55-9977-BF059274911C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7ABB5493-BB15-4693-BD7D-2F189E5C74DA}"
-	ProjectSection(SolutionItems) = preProject
-		global.json = global.json
-	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "localization.WebApp", "src\localization.WebApp\localization.WebApp.xproj", "{638EEC84-755B-47A4-B952-A220082C4224}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "localization.WebApp", "src\localization.WebApp\localization.WebApp.csproj", "{638EEC84-755B-47A4-B952-A220082C4224}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebLib", "src\WebLib\WebLib.xproj", "{70D6D992-BC7E-4EBA-9D22-601D5892A88D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebLib", "src\WebLib\WebLib.csproj", "{70D6D992-BC7E-4EBA-9D22-601D5892A88D}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "cloudscribe.Web.Localization", "src\cloudscribe.Web.Localization\cloudscribe.Web.Localization.xproj", "{BAFDA9D4-64A4-43CA-8F33-E6BF44824608}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cloudscribe.Web.Localization", "src\cloudscribe.Web.Localization\cloudscribe.Web.Localization.csproj", "{BAFDA9D4-64A4-43CA-8F33-E6BF44824608}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
