@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>more flexible localization for ASP.NET Core</Description>
-    <VersionPrefix>1.1.0-rc20161127</VersionPrefix>
+    <VersionPrefix>1.2.0</VersionPrefix>
     <Authors>Joe Audette</Authors>
     <TargetFrameworks>net46;net451;net452;netstandard1.6</TargetFrameworks>
     <AssemblyName>cloudscribe.Web.Localization</AssemblyName>
