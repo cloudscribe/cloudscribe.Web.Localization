@@ -2,6 +2,12 @@
 
 I developed this project to meet my localization goals for [cloudscribe.Core](https://github.com/joeaudette/cloudscribe) and [cloudscribe.SimpleContent](https://github.com/joeaudette/cloudscribe.SimpleContent). However it has no dependencies on other cloudscribe components and can be used by anyone who wants the provided functionality. Get the big picture on cloudscribe projects at [cloudscribe.com](https://www.cloudscribe.com)
 
+### Build Status
+
+| Windows  | Linux/Mac |
+| ------------- | ------------- |
+| [![Build status](https://ci.appveyor.com/api/projects/status/pmjr831lvwposn5w?svg=true)](https://ci.appveyor.com/project/joeaudette/cloudscribe-web-localization)  | [![Build Status](https://travis-ci.org/joeaudette/cloudscribe.Web.Localization.svg?branch=master)](https://travis-ci.org/joeaudette/cloudscribe.Web.Localization)  |
+
 ## Rationale
 
 My vision for composing web applications is to build separate components for each feature or purpose in separate class library projects, packaged as nugets that one can bring into their main web application to add functionality. The main web application may or may not have its own features that it implements, but much or most of the functionality will come from class library projects that are pulled in as nuget dependencies.
