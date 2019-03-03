@@ -1,11 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp1.1</TargetFramework>
-    <PreserveCompilationContext>true</PreserveCompilationContext>
-    <AssemblyName>localization.WebApp</AssemblyName>
-    <OutputType>Exe</OutputType>
-    <PackageId>localization.WebApp</PackageId>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
     <UserSecretsId>aspnet-localization.WebApp-940cc8f9-71c6-4716-a22f-dac5c78eb805</UserSecretsId>
   </PropertyGroup>
 
@@ -21,31 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="1.1.*" />
-    <PackageReference Include="Microsoft.AspNetCore.Diagnostics" Version="1.1.*" />
-    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="1.1.*" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="1.1.*" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.*" />
-    <PackageReference Include="Microsoft.AspNetCore.Server.IISIntegration" Version="1.1.*" />
-    <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="1.1.*" />
-    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.*" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="1.1.*" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.*" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="1.1.*" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="1.1.*" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="1.1.*" />
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="1.1.*" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.1.*" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.*" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="1.1.*" />
-    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="1.1.*" />
-    <PackageReference Include="Microsoft.Extensions.Options" Version="1.1.*" />
+    <PackageReference Include="Microsoft.AspNetCore.App"  />
   </ItemGroup>
 
-  <ItemGroup>
-    <DotNetCliToolReference Include="BundlerMinifier.Core" Version="2.2.301" />
-    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="1.*" />
-    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.*" />
-  </ItemGroup>
+ 
 
 </Project>
