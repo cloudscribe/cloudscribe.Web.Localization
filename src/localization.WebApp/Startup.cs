@@ -14,6 +14,7 @@ using System.Globalization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Localization;
+using cloudscribe.Web.Localization;
 
 //https://github.com/aspnet/Localization/issues/157
 
@@ -21,20 +22,14 @@ namespace localization.WebApp
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
-        {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
 
-            
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
+        {  
+            Configuration =configuration;
 
-            builder.AddEnvironmentVariables();
-            Configuration = builder.Build();
         }
 
-        public IConfigurationRoot Configuration { get; }
+        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -55,18 +50,21 @@ namespace localization.WebApp
                 .AddDataAnnotationsLocalization()
                 ;
 
-            
+            var supportedCultures = new[]
+                {
+                    new CultureInfo("en-US"),
+                    //new CultureInfo("en"),
+                    new CultureInfo("fr-FR"),
+                   // new CultureInfo("fr"),
+                };
+
+            var routeSegmentLocalizationProvider = new FirstUrlSegmentRequestCultureProvider(supportedCultures.ToList());
+
             // this seems in conflict with middleware config below where we new up the options
             // but without this the language dropdown in layout only shows english
             services.Configure<RequestLocalizationOptions>(options =>
             {
-                var supportedCultures = new[]
-                {
-                    new CultureInfo("en-US"),
-                    new CultureInfo("en"),
-                    new CultureInfo("fr-FR"),
-                    new CultureInfo("fr"),
-                };
+                
 
                 // State what the default culture for your application is. This will be used if no specific culture
                 // can be determined for a given request.
@@ -91,15 +89,20 @@ namespace localization.WebApp
                 //  // My custom request culture logic
                 //  return new ProviderCultureResult("en");
                 //}));
+                options.RequestCultureProviders.Insert(0, routeSegmentLocalizationProvider);
+
             });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(
+            IApplicationBuilder app, 
+            IHostingEnvironment env, 
+            ILoggerFactory loggerFactory,
+            IOptions<RequestLocalizationOptions> locOptions
+            )
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
-
+           
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -113,13 +116,22 @@ namespace localization.WebApp
 
             app.UseStaticFiles();
 
-            var locOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
-            app.UseRequestLocalization(locOptions.Value);
             
+            app.UseRequestLocalization(locOptions.Value);
+
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
+            
 
             app.UseMvc(routes =>
             {
+                routes.MapRoute(
+                    name: "default-localized",
+                    template: "{culture}/{controller}/{action}/{id?}",
+                    defaults: new { controller = "Home", action = "Index" },
+                    constraints: new { culture = new CultureSegmentRouteConstraint() }
+                    );
+
+
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
