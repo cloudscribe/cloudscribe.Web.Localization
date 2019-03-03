@@ -6,7 +6,7 @@ I developed this project to meet my localization goals for [cloudscribe.Core](ht
 
 | Windows  | Linux/Mac |
 | ------------- | ------------- |
-| [![Build status](https://ci.appveyor.com/api/projects/status/pmjr831lvwposn5w?svg=true)](https://ci.appveyor.com/project/joeaudette/cloudscribe-web-localization)  | [![Build Status](https://travis-ci.org/joeaudette/cloudscribe.Web.Localization.svg?branch=master)](https://travis-ci.org/joeaudette/cloudscribe.Web.Localization)  |
+| [![Build status](https://ci.appveyor.com/api/projects/status/pmjr831lvwposn5w/branch/master?svg=true)](https://ci.appveyor.com/project/joeaudette/cloudscribe-web-localization/branch/master)  | [![Build Status](https://travis-ci.org/cloudscribe/cloudscribe.Web.Localization.svg?branch=master)](https://travis-ci.org/cloudscribe/cloudscribe.Web.Localization)  |
 
 ## Rationale
 

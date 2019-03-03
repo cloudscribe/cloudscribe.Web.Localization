@@ -22,9 +22,11 @@ namespace localization.WebApp
 {
     public class Startup
     {
+
         public Startup(IConfiguration configuration, IHostingEnvironment env)
         {  
             Configuration =configuration;
+
         }
 
         public IConfiguration Configuration { get; }
