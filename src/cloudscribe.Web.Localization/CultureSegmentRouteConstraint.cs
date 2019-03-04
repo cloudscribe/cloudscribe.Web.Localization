@@ -10,6 +10,13 @@ namespace cloudscribe.Web.Localization
 {
     public class CultureSegmentRouteConstraint : IRouteConstraint
     {
+        public CultureSegmentRouteConstraint(bool useSecondSegment = false)
+        {
+            _useSecondSegment = useSecondSegment;
+        }
+
+        private bool _useSecondSegment;
+
         public bool Match(
             HttpContext httpContext,
             IRouter route,
@@ -45,7 +52,20 @@ namespace cloudscribe.Web.Localization
             if (!requestPath.Contains("/")) return requestPath;
 
             var segments = SplitOnCharAndTrim(requestPath, '/');
-            return segments.FirstOrDefault();
+            if(_useSecondSegment)
+            {
+                if(segments.Count > 1)
+                {
+                    return segments[1]; //second segment
+                }
+
+                return null; 
+            }
+            else
+            {
+                return segments.FirstOrDefault();
+            }
+            
         }
 
         private List<string> SplitOnCharAndTrim(string s, char c)
