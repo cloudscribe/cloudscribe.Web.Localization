@@ -2,6 +2,8 @@
 
 I developed this project to meet my localization goals for [cloudscribe.Core](https://github.com/joeaudette/cloudscribe) and [cloudscribe.SimpleContent](https://github.com/joeaudette/cloudscribe.SimpleContent). However it has no dependencies on other cloudscribe components and can be used by anyone who wants the provided functionality. Get the big picture on cloudscribe projects at [cloudscribe.com](https://www.cloudscribe.com)
 
+If you have questions please visit our community forums https://www.cloudscribe.com/forum
+
 ### Build Status
 
 | Windows  | Linux/Mac |
