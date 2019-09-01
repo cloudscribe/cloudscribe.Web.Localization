@@ -1,23 +1,20 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>WebLib</AssemblyName>
-    <PackageId>WebLib</PackageId>
-    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
-    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <RazorLangVersion>3.0</RazorLangVersion>
+    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+   
   </PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Views\**;MyResources\**;Controllers.OtherController.fr.resx;Controllers.BarController.fr.resx" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
+
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor" Version="2.0.*" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.0.*" />
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="2.0.*" />
-    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="2.0.*" />
+
+    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="3.0.0-*" />
   </ItemGroup>
 
 </Project>
