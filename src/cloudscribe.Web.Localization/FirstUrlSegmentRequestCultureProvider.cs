@@ -27,11 +27,14 @@ namespace cloudscribe.Web.Localization
 
             if (!string.IsNullOrWhiteSpace(pathStartingSegment))
             {
-                var matchingUICulture = _supportedUICultures.Where(x => x.Name == pathStartingSegment || x.TwoLetterISOLanguageName == pathStartingSegment).FirstOrDefault();
+                var matchingUICulture = _supportedUICultures.Where(x => x.Name.Equals(pathStartingSegment, System.StringComparison.InvariantCultureIgnoreCase) 
+                || x.TwoLetterISOLanguageName.Equals(pathStartingSegment, System.StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+
                 CultureInfo mainCulture = null;
                 if (_supportedCultures != null)
                 {
-                    mainCulture = _supportedCultures.Where(x => x.Name == pathStartingSegment || x.TwoLetterISOLanguageName == pathStartingSegment).FirstOrDefault();
+                    mainCulture = _supportedCultures.Where(x => x.Name.Equals(pathStartingSegment, System.StringComparison.InvariantCultureIgnoreCase) 
+                    || x.TwoLetterISOLanguageName.Equals(pathStartingSegment, System.StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
                 }
                 if (matchingUICulture != null)
                 {

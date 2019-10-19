@@ -46,6 +46,11 @@ namespace localization.WebApp
             //services.AddLocalization();
             services.AddLocalization(options => options.ResourcesPath = "GlobalResources" );
 
+            services.AddRouting(options =>
+            {
+                options.LowercaseUrls = true;
+            });
+
             services.AddMvc()
                 .AddRazorOptions(options =>
                 {
