@@ -4,8 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
+//using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+//using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Localization;
 using cloudscribe.Web.Localization;
+using Microsoft.Extensions.Hosting;
 
 //https://github.com/aspnet/Localization/issues/157
 
@@ -23,7 +24,7 @@ namespace localization.WebApp
     public class Startup
     {
 
-        public Startup(IConfiguration configuration, IHostingEnvironment env)
+        public Startup(IConfiguration configuration)
         {  
             Configuration =configuration;
 
@@ -34,6 +35,10 @@ namespace localization.WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddControllersWithViews();
+            services.AddRazorPages();
+
             services.Configure<GlobalResourceOptions>(Configuration.GetSection("GlobalResourceOptions"));
             services.AddSingleton<IStringLocalizerFactory, GlobalResourceManagerStringLocalizerFactory>();
             //services.AddSingleton<IStringLocalizerFactory, PatchedResourceManagerStringLocalizerFactory>();
@@ -44,7 +49,7 @@ namespace localization.WebApp
             services.AddMvc()
                 .AddRazorOptions(options =>
                 {
-                    options.AddEmbeddedViewsForWebLib();
+                    //options.AddEmbeddedViewsForWebLib();
                 })
                 .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
                 .AddDataAnnotationsLocalization()
@@ -96,9 +101,8 @@ namespace localization.WebApp
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(
-            IApplicationBuilder app, 
-            IHostingEnvironment env, 
-            ILoggerFactory loggerFactory,
+            IApplicationBuilder app,
+            IWebHostEnvironment env, 
             IOptions<RequestLocalizationOptions> locOptions
             )
         {
@@ -106,7 +110,7 @@ namespace localization.WebApp
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
+                //app.UseDatabaseErrorPage();
                
             }
             else
@@ -119,23 +123,44 @@ namespace localization.WebApp
             
             app.UseRequestLocalization(locOptions.Value);
 
-            // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
-            
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
-            app.UseMvc(routes =>
+            app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
-                    name: "default-localized",
-                    template: "{culture}/{controller}/{action}/{id?}",
-                    defaults: new { controller = "Home", action = "Index" },
-                    constraints: new { culture = new CultureSegmentRouteConstraint() }
-                    );
+                endpoints.MapControllerRoute(
+                   name: "default-localized",
+                   pattern: "{culture}/{controller}/{action}/{id?}",
+                   defaults: new { controller = "Home", action = "Index" },
+                   constraints: new { culture = new CultureSegmentRouteConstraint() }
+                   );
 
-
-                routes.MapRoute(
+                endpoints.MapControllerRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
+
+
+            //app.UseMvc(routes =>
+            //{
+            //    routes.MapRoute(
+            //        name: "default-localized",
+            //        template: "{culture}/{controller}/{action}/{id?}",
+            //        defaults: new { controller = "Home", action = "Index" },
+            //        constraints: new { culture = new CultureSegmentRouteConstraint() }
+            //        );
+
+
+            //    routes.MapRoute(
+            //        name: "default",
+            //        template: "{controller=Home}/{action=Index}/{id?}");
+            //});
         }
     }
 }
