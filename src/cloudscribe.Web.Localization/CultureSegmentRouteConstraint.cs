@@ -33,8 +33,14 @@ namespace cloudscribe.Web.Localization
             {
                 var cultureSettingsAccessor = httpContext.RequestServices.GetService<IOptions<RequestLocalizationOptions>>();
                 var cultureSettings = cultureSettingsAccessor.Value;
-                var found = cultureSettings.SupportedUICultures.Where(x => x.Name == requestFolder || x.TwoLetterISOLanguageName == requestFolder).Any();
-                var isDefaultCulture = cultureSettings.DefaultRequestCulture.UICulture.Name == requestFolder || cultureSettings.DefaultRequestCulture.UICulture.TwoLetterISOLanguageName == requestFolder;
+                var found = cultureSettings.SupportedUICultures.Where(x => x.Name.Equals(requestFolder,System.StringComparison.InvariantCultureIgnoreCase) 
+                || x.TwoLetterISOLanguageName.Equals(requestFolder, System.StringComparison.InvariantCultureIgnoreCase )).Any();
+                
+                var isDefaultCulture = cultureSettings.DefaultRequestCulture.UICulture.Name.Equals(requestFolder, System.StringComparison.InvariantCultureIgnoreCase) 
+                    || cultureSettings.DefaultRequestCulture.UICulture.TwoLetterISOLanguageName.Equals(requestFolder, System.StringComparison.InvariantCultureIgnoreCase);
+                
+                
+                
                 //don't match default culture because we don't want the culture segment in the url for the default culture
                 if (found && !isDefaultCulture)
                 {
