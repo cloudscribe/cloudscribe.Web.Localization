@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,12 +30,17 @@ namespace cloudscribe.Web.Localization
 
 
             string requestFolder = GetStartingSegment(httpContext.Request.Path);
+
             if (!string.IsNullOrWhiteSpace(requestFolder))
             {
+                var logger = httpContext.RequestServices.GetService<ILogger<CultureSegmentRouteConstraint>>();
+
                 var cultureSettingsAccessor = httpContext.RequestServices.GetService<IOptions<RequestLocalizationOptions>>();
                 var cultureSettings = cultureSettingsAccessor.Value;
-                var found = cultureSettings.SupportedUICultures.Where(x => x.Name.Equals(requestFolder,System.StringComparison.InvariantCultureIgnoreCase) 
-                || x.TwoLetterISOLanguageName.Equals(requestFolder, System.StringComparison.InvariantCultureIgnoreCase )).Any();
+                var found = cultureSettings.SupportedUICultures.Where(x => 
+                x.Name.Equals(requestFolder,System.StringComparison.InvariantCultureIgnoreCase) 
+                || x.TwoLetterISOLanguageName.Equals(requestFolder, System.StringComparison.InvariantCultureIgnoreCase )
+                ).Any();
                 
                 var isDefaultCulture = cultureSettings.DefaultRequestCulture.UICulture.Name.Equals(requestFolder, System.StringComparison.InvariantCultureIgnoreCase) 
                     || cultureSettings.DefaultRequestCulture.UICulture.TwoLetterISOLanguageName.Equals(requestFolder, System.StringComparison.InvariantCultureIgnoreCase);
@@ -44,8 +50,12 @@ namespace cloudscribe.Web.Localization
                 //don't match default culture because we don't want the culture segment in the url for the default culture
                 if (found && !isDefaultCulture)
                 {
+                    logger.LogDebug($"matched culture route constraint for path {httpContext.Request.Path}");
+
                     return true;
                 }
+
+                logger.LogDebug($"did not match culture route constraint for path {httpContext.Request.Path}");
             }
 
 
