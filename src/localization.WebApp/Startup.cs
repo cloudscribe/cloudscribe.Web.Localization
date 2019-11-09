@@ -129,7 +129,7 @@ namespace localization.WebApp
             app.UseRequestLocalization(locOptions.Value);
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
+            //app.UseStaticFiles();
 
             app.UseRouting();
 
@@ -148,6 +148,7 @@ namespace localization.WebApp
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
                 endpoints.MapRazorPages();
             });
 
