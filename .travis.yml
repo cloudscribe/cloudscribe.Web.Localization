@@ -1,17 +1,15 @@
 language: csharp
 solution: cloudscribe.Web.Localization.sln
 sudo: false
-dist: trusty
+dist: xenial
 mono: none
-dotnet: 2.0.0
+dotnet: 3.0.100
 env:
   global:
     - DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
     - DOTNET_CLI_TELEMETRY_OPTOUT: 1   
 os:
   - linux
-  - osx
-osx_image: xcode8.3
 script:
   - if test "$TRAVIS_OS_NAME" == "linux"; then dotnet restore; fi
   - if test "$TRAVIS_OS_NAME" == "osx"; then dotnet restore --disable-parallel; fi
