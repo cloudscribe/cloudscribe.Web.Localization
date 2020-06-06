@@ -21,14 +21,16 @@ namespace Microsoft.Extensions.Localization
         private readonly ConcurrentDictionary<string, object> _missingManifestCache = new ConcurrentDictionary<string, object>();
         private readonly IResourceNamesCache _resourceNamesCache;
         private readonly ResourceManager _resourceManager;
-        private readonly AssemblyWrapper _resourceAssemblyWrapper;
+        private readonly Assembly _resourceAssembly;
         private readonly string _resourceBaseName;
 
         private readonly ResourceManager _globalResourceManager;
         private readonly GlobalResourceOptions _globalResourceOptions;
 
+        
+
         /// <summary>
-        /// Creates a new <see cref="HybridResourceManagerStringLocalizer"/>.
+        /// Creates a new <see cref="GlobalResourceManagerStringLocalizer"/>.
         /// </summary>
         /// <param name="resourceManager">The <see cref="System.Resources.ResourceManager"/> to read strings from.</param>
         /// <param name="resourceAssembly">The <see cref="Assembly"/> that contains the strings as embedded resources.</param>
@@ -44,41 +46,15 @@ namespace Microsoft.Extensions.Localization
             GlobalResourceOptions globalResourceOptions,
             ResourceManager globalResourceManager = null
             )
-            : this(
-                  resourceManager, 
-                  new AssemblyWrapper(resourceAssembly), 
-                  baseName, 
-                  resourceNamesCache,
-                  globalResourceOptions,
-                  globalResourceManager
-                  )
-        {
-            if (resourceAssembly == null)
-            {
-                throw new ArgumentNullException(nameof(resourceAssembly));
-            }
-        }
-
-        /// <summary>
-        /// Intended for testing purposes only.
-        /// </summary>
-        public GlobalResourceManagerStringLocalizer(
-            ResourceManager resourceManager,
-            AssemblyWrapper resourceAssemblyWrapper,
-            string baseName,
-            IResourceNamesCache resourceNamesCache,
-            GlobalResourceOptions globalResourceOptions,
-            ResourceManager globalResourceManager = null
-            )
         {
             if (resourceManager == null)
             {
                 throw new ArgumentNullException(nameof(resourceManager));
             }
 
-            if (resourceAssemblyWrapper == null)
+            if (resourceAssembly == null)
             {
-                throw new ArgumentNullException(nameof(resourceAssemblyWrapper));
+                throw new ArgumentNullException(nameof(resourceAssembly));
             }
 
             if (baseName == null)
@@ -91,7 +67,7 @@ namespace Microsoft.Extensions.Localization
                 throw new ArgumentNullException(nameof(resourceNamesCache));
             }
 
-            _resourceAssemblyWrapper = resourceAssemblyWrapper;
+            _resourceAssembly = resourceAssembly;
             _resourceManager = resourceManager;
             _resourceBaseName = baseName;
             _resourceNamesCache = resourceNamesCache;
@@ -143,7 +119,7 @@ namespace Microsoft.Extensions.Localization
             return culture == null
                 ? new GlobalResourceManagerStringLocalizer(
                     _resourceManager,
-                    _resourceAssemblyWrapper.Assembly,
+                    _resourceAssembly,
                     _resourceBaseName,
                     _resourceNamesCache,
                     _globalResourceOptions,
@@ -151,7 +127,7 @@ namespace Microsoft.Extensions.Localization
                     )
                 : new GlobalResourceManagerWithCultureStringLocalizer(
                     _resourceManager,
-                    _resourceAssemblyWrapper.Assembly,
+                    _resourceAssembly,
                     _resourceBaseName,
                     _resourceNamesCache,
                     culture,
@@ -307,11 +283,11 @@ namespace Microsoft.Extensions.Localization
         {
             var resourceStreamName = GetResourceStreamName(culture);
 
-            var cacheKey = $"assembly={_resourceAssemblyWrapper.FullName};resourceStreamName={resourceStreamName}";
+            var cacheKey = $"assembly={_resourceAssembly.FullName};resourceStreamName={resourceStreamName}";
 
             var cultureResourceNames = _resourceNamesCache.GetOrAdd(cacheKey, _ =>
             {
-                using (var cultureResourceStream = _resourceAssemblyWrapper.GetManifestResourceStream(resourceStreamName))
+                using (var cultureResourceStream = _resourceAssembly.GetManifestResourceStream(resourceStreamName))
                 {
                     if (cultureResourceStream == null)
                     {
