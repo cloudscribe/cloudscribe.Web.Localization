@@ -21,7 +21,7 @@ namespace Microsoft.Extensions.Localization
         private readonly IResourceNamesCache _resourceNamesCache = new ResourceNamesCache();
         private readonly ConcurrentDictionary<string, GlobalResourceManagerStringLocalizer> _localizerCache =
             new ConcurrentDictionary<string, GlobalResourceManagerStringLocalizer>();
-        private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly IWebHostEnvironment _hostingEnvironment;
         private readonly string _resourcesRelativePath;
         private readonly GlobalResourceOptions globalResourceOptions;
 
@@ -31,7 +31,7 @@ namespace Microsoft.Extensions.Localization
         /// <param name="hostingEnvironment">The <see cref="IHostingEnvironment"/>.</param>
         /// <param name="localizationOptions">The <see cref="IOptions{LocalizationOptions}"/>.</param>
         public GlobalResourceManagerStringLocalizerFactory(
-            IHostingEnvironment hostingEnvironment,
+            IWebHostEnvironment hostingEnvironment,
             IOptions<LocalizationOptions> localizationOptions,
             IOptions<GlobalResourceOptions> globalResourceOptionsAccessor
             )
