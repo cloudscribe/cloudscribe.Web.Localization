@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>aspnet-localization.WebApp-940cc8f9-71c6-4716-a22f-dac5c78eb805</UserSecretsId>
   </PropertyGroup>
 

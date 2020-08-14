@@ -2,9 +2,9 @@
 
   <PropertyGroup>
     <Description>more flexible localization for ASP.NET Core</Description>
-    <Version>3.0.3</Version>
+    <Version>3.1.0</Version>
     <Authors>Joe Audette</Authors>
-    <TargetFrameworks>netcoreapp3.0</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
     <PackageId>cloudscribe.Web.Localization</PackageId>
     <PackageTags>cloudscribe;localization;resx</PackageTags>
     <PackageIcon>icon.png</PackageIcon>
