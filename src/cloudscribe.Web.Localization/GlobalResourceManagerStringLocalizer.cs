@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
 using System.Resources;
-using Microsoft.Extensions.Localization.Internal;
 
 //https://github.com/aspnet/Localization/blob/dev/src/Microsoft.Extensions.Localization/ResourceManagerStringLocalizer.cs
 
