@@ -2,7 +2,7 @@ name: Manual NuGet Push to ESDM Nexus
 
 on:
   workflow_dispatch:
-      branches: [ "develop" ]
+    branches: [ "develop" ]
 
 jobs:
   push-nuget:
@@ -31,4 +31,5 @@ jobs:
           echo "Found packages: $PACKAGES"
           for PACKAGE in $PACKAGES; do
             echo "Pushing $PACKAGE"
+            dotnet nuget push "$PACKAGE" --source ${{ secrets.ESDM_NUGET_HOSTED_URL }} --skip-duplicate
           done
