@@ -2,6 +2,7 @@ name: Manual NuGet Push to ESDM Nexus
 
 on:
   workflow_dispatch:
+      branches: [ "develop" ]
 
 jobs:
   push-nuget:
