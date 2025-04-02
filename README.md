@@ -5,10 +5,15 @@ I developed this project to meet my localization goals for [cloudscribe.Core](ht
 If you have questions please visit our community forums https://www.cloudscribe.com/forum
 
 ### Build Status
-
+<!--
 | Windows  | Linux/Mac |
 | ------------- | ------------- |
 | [![Build status](https://ci.appveyor.com/api/projects/status/pmjr831lvwposn5w/branch/master?svg=true)](https://ci.appveyor.com/project/joeaudette/cloudscribe-web-localization/branch/master)  | [![Build Status](https://travis-ci.org/cloudscribe/cloudscribe.Web.Localization.svg?branch=master)](https://travis-ci.org/cloudscribe/cloudscribe.Web.Localization)  |
+-->
+
+<!-- Making badges prettier: -->
+[![CS Build Devel](https://img.shields.io/github/actions/workflow/status/cloudscribe/cloudscribe.Web.Localization/cloudscribe-develop.yml?branch=develop&event=push&style=for-the-badge&label=🚀%20Develop%20Branch)](https://github.com/cloudscribe/cloudscribe.Web.Localization/actions/workflows/cloudscribe-develop.yml)
+
 
 ## Rationale
 
