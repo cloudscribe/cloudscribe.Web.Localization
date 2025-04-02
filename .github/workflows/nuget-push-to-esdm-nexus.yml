@@ -20,8 +20,6 @@ jobs:
         run: dotnet build -c Release
       - name: Create NuGet package
         run: dotnet pack -c Release
-      - name: Publish NuGet package
-        run: dotnet nuget push **/*.nupkg --source ${{ secrets.ESDM_NUGET_HOSTED_URL }}
       - name: Find and Push NuGet packages
         run: |
           PACKAGES=$(find . -name "*.nupkg" | grep -E "cloudscribe|sts\.Common")
