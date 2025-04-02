@@ -1,0 +1,35 @@
+name: Manual NuGet Push to ESDM Nexus
+
+on:
+  workflow_dispatch:
+
+jobs:
+  push-nuget:
+    runs-on: ubuntu-latest
+    steps:  # <-- Correct indentation
+      - uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Setup NuGet
+        run: dotnet nuget add source ${{ secrets.ESDM_NUGET_HOSTED_URL }} -u ${{ secrets.NUGET_USERNAME }} -p ${{ secrets.NUGET_PASSWORD }} --store-password-in-clear-text
+      - name: Restore dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build -c Release
+      - name: Create NuGet package
+        run: dotnet pack -c Release
+      - name: Publish NuGet package
+        run: dotnet nuget push **/*.nupkg --source ${{ secrets.ESDM_NUGET_HOSTED_URL }}
+      - name: Find and Push NuGet packages
+        run: |
+          PACKAGES=$(find . -name "*.nupkg" | grep -E "cloudscribe|sts\.Common")
+          if [ -z "$PACKAGES" ]; then
+            echo "No matching package found. Exiting."
+            exit 1
+          fi
+          echo "Found packages: $PACKAGES"
+          for PACKAGE in $PACKAGES; do
+            echo "Pushing $PACKAGE"
+          done
