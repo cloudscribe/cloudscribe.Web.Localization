@@ -14,8 +14,7 @@ jobs:
         with:
           dotnet-version: 8.0.x
       - name: Setup NuGet
-        run: dotnet nuget add source ${{ secrets.NUGET_SOURCE_URL }} -u ${{ secrets.NUGET_USERNAME }} -p ${{ secrets.NUGET_PASSWORD }} \
-        --store-password-in-clear-text --name esdm-nexus
+        run: dotnet nuget add source ${{ secrets.NUGET_SOURCE_URL }} -u ${{ secrets.NUGET_USERNAME }} -p ${{ secrets.NUGET_PASSWORD }}  --store-password-in-clear-text --name esdm-nexus
       - name: Restore dependencies
         run: dotnet restore
       - name: Build
@@ -23,8 +22,7 @@ jobs:
       - name: Create NuGet package
         run: dotnet pack -c Release
       - name: Auth to other Nexus repo
-        run: dotnet nuget add source ${{ secrets.ESDM_NUGET_HOSTED_URL }} -u ${{ secrets.NUGET_USERNAME }} -p ${{ secrets.NUGET_PASSWORD }} \
-        --store-password-in-clear-text --name esdm-nexus-target
+        run: dotnet nuget add source ${{ secrets.ESDM_NUGET_HOSTED_URL }} -u ${{ secrets.NUGET_USERNAME }} -p ${{ secrets.NUGET_PASSWORD }}  --store-password-in-clear-text --name esdm-nexus-target
       - name: Find and Push NuGet packages
         run: |
           PACKAGES=$(find . -name "*.nupkg" | grep -E "cloudscribe|sts\.Common")
