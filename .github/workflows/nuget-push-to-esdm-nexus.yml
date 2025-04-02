@@ -14,13 +14,17 @@ jobs:
         with:
           dotnet-version: 8.0.x
       - name: Setup NuGet
-        run: dotnet nuget add source ${{ secrets.ESDM_NUGET_HOSTED_URL }} -u ${{ secrets.NUGET_USERNAME }} -p ${{ secrets.NUGET_PASSWORD }} --store-password-in-clear-text
+        run: dotnet nuget add source ${{ secrets.NUGET_SOURCE_URL }} -u ${{ secrets.NUGET_USERNAME }} -p ${{ secrets.NUGET_PASSWORD }} \
+        --store-password-in-clear-text --name esdm-nexus
       - name: Restore dependencies
         run: dotnet restore
       - name: Build
         run: dotnet build -c Release
       - name: Create NuGet package
         run: dotnet pack -c Release
+      - name: Auth to other Nexus repo
+        run: dotnet nuget add source ${{ secrets.ESDM_NUGET_HOSTED_URL }} -u ${{ secrets.NUGET_USERNAME }} -p ${{ secrets.NUGET_PASSWORD }} \
+        --store-password-in-clear-text --name esdm-nexus-target
       - name: Find and Push NuGet packages
         run: |
           PACKAGES=$(find . -name "*.nupkg" | grep -E "cloudscribe|sts\.Common")
@@ -31,5 +35,5 @@ jobs:
           echo "Found packages: $PACKAGES"
           for PACKAGE in $PACKAGES; do
             echo "Pushing $PACKAGE"
-            dotnet nuget push "$PACKAGE" --source ${{ secrets.ESDM_NUGET_HOSTED_URL }} --skip-duplicate
+            dotnet nuget push "$PACKAGE" --source esdm-nexus-target --skip-duplicate
           done
