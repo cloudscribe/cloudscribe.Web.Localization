@@ -16,7 +16,7 @@ jobs:
         run: |
           if [[ "${{ github.ref }}" != "refs/heads/master" ]]; then
             echo "Branch is not master, exiting."
-            exit 0
+            exit 1
           fi
       - name: Setup NuGet
         run: dotnet nuget add source ${{ secrets.NUGET_SOURCE_URL }} -u ${{ secrets.NUGET_USERNAME }} -p ${{ secrets.NUGET_PASSWORD }}  --store-password-in-clear-text --name esdm-nexus
