@@ -19,7 +19,7 @@ jobs:
             exit 1
           fi
       - name: Setup NuGet
-        run: dotnet nuget add source ${{ secrets.NUGET_SOURCE_URL }} -u ${{ secrets.NUGET_USERNAME }} -p ${{ secrets.NUGET_PASSWORD }}  --store-password-in-clear-text --name esdm-nexus
+        run: dotnet nuget add source ${{ secrets.NUGET_SOURCE_URL }} -u ${{ secrets.NUGET_USERNAME }} -p ${{ secrets.NUGET_PASSWORD }}  --store-password-in-clear-text --name esdm-nuget-testing
       - name: Restore dependencies
         run: dotnet restore
       - name: Build
@@ -27,8 +27,8 @@ jobs:
       - name: Create NuGet package
         run: dotnet pack -c Release
       - name: Auth to other Nexus repo
-        run: dotnet nuget add source ${{ secrets.ESDM_NUGET_HOSTED_URL }} -u ${{ secrets.NUGET_USERNAME }} -p ${{ secrets.NUGET_PASSWORD }}  --store-password-in-clear-text --name esdm-nexus-target
-      - name: Find and Push NuGet packages
+        run: dotnet nuget add source ${{ secrets.ESDM_NUGET_HOSTED_URL }} -u ${{ secrets.NUGET_USERNAME }} -p ${{ secrets.NUGET_PASSWORD }}  --store-password-in-clear-text --name esdm-nuget-hosted
+      - name: Find and Push NuGet packages to Nexus
         run: |
           PACKAGES=$(find . -name "*.nupkg" | grep -E "cloudscribe|sts\.Common")
           if [ -z "$PACKAGES" ]; then
@@ -37,6 +37,18 @@ jobs:
           fi
           echo "Found packages: $PACKAGES"
           for PACKAGE in $PACKAGES; do
-            echo "Pushing $PACKAGE"
-            dotnet nuget push "$PACKAGE" --source esdm-nexus-target --skip-duplicate
+            echo "Pushing $PACKAGE to Nexus"
+            dotnet nuget push "$PACKAGE" --source esdm-nuget-hosted --skip-duplicate
+          done
+      - name: Find and Push NuGet packages to nuget.org
+        run: |
+          PACKAGES=$(find . -name "*.nupkg" | grep -E "cloudscribe|sts\.Common")
+          if [ -z "$PACKAGES" ]; then
+            echo "No matching package found. Exiting."
+            exit 1
+          fi
+          echo "Found packages: $PACKAGES"
+          for PACKAGE in $PACKAGES; do
+            echo "Pushing $PACKAGE to nuget.org"
+            dotnet nuget push "$PACKAGE" --api-key "$NUGET_ORG_API_KEY" --source "https://api.nuget.org/v3/index.json" --skip-duplicate
           done
