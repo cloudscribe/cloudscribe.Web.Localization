@@ -12,8 +12,8 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
-      - name: Something
-        run: echo "hello" && exit 0
+      - name: Setup NuGet
+        run: dotnet nuget add source ${{ secrets.NUGET_SOURCE_URL }} -u ${{ secrets.NUGET_USERNAME }} -p ${{ secrets.NUGET_PASSWORD }}  --store-password-in-clear-text --name esdm-nexus
       - name: Restore dependencies
         run: dotnet restore
       - name: Build
