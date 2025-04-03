@@ -1,4 +1,4 @@
-name: Manual NuGet Push to ESDM Nexus
+name: NuGet Push to Production - ESDM Nexus and nuget.org
 
 on:
   workflow_dispatch:
