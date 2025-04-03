@@ -12,6 +12,12 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
+      - name: Exit if the branch is not master
+        run: |
+          if [[ "${{ github.ref }}" != "refs/heads/master" ]]; then
+            echo "Branch is not master, exiting."
+            exit 0
+          fi
       - name: Setup NuGet
         run: dotnet nuget add source ${{ secrets.NUGET_SOURCE_URL }} -u ${{ secrets.NUGET_USERNAME }} -p ${{ secrets.NUGET_PASSWORD }}  --store-password-in-clear-text --name esdm-nexus
       - name: Restore dependencies
