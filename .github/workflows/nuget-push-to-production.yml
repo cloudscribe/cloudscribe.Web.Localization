@@ -41,6 +41,8 @@ jobs:
             dotnet nuget push "$PACKAGE" --source esdm-nuget-hosted --skip-duplicate || echo "WARNING - skipping duplicate package: $PACKAGE"
           done
       - name: Find and Push NuGet packages to nuget.org
+        env:
+          NUGET_ORG_API_KEY: ${{ secrets.NUGET_ORG_API_KEY }}
         run: |
           PACKAGES=$(find . -name "*.nupkg" | grep -E "cloudscribe|sts\.Common")
           if [ -z "$PACKAGES" ]; then
