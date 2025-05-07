@@ -16,6 +16,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Localization;
 using cloudscribe.Web.Localization;
 using Microsoft.Extensions.Hosting;
+using cloudscribe.Web.Localization.Versioning;
 
 //https://github.com/aspnet/Localization/issues/157
 
@@ -42,7 +43,8 @@ namespace localization.WebApp
             services.Configure<GlobalResourceOptions>(Configuration.GetSection("GlobalResourceOptions"));
             services.AddSingleton<IStringLocalizerFactory, GlobalResourceManagerStringLocalizerFactory>();
             //services.AddSingleton<IStringLocalizerFactory, PatchedResourceManagerStringLocalizerFactory>();
-
+            services.AddScoped<IVersionProviderFactory, VersionProviderFactory>();
+            services.AddScoped<IVersionProvider, VersionProvider>();
             //services.AddLocalization();
             services.AddLocalization(options => options.ResourcesPath = "GlobalResources" );
 
