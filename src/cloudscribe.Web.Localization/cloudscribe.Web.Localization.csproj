@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <Description>more flexible localization for ASP.NET Core</Description>
@@ -13,7 +13,6 @@
     <RepositoryUrl>https://github.com/cloudscribe/cloudscribe.Web.Localization.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
 
-    <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
